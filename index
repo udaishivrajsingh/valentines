@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Valentine’s Question 💘</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .box {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            width: 320px;
+            z-index: 10;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        .yes {
+            background-color: #38b000;
+            color: white;
+        }
+
+        .no {
+            background-color: #d00000;
+            color: white;
+        }
+
+        .retry {
+            background-color: #ff4d6d;
+            color: white;
+            display: none;
+        }
+
+        p {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        /* ❤️ HEARTS */
+        .heart {
+            position: fixed;
+            top: -20px;
+            font-size: 24px;
+            animation: fall linear forwards;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>Will you be my Valentine? 😍😘🥰</h2>
+
+    <div id="choices">
+        <button class="yes" onclick="yesClicked()">YES 💘</button>
+        <button class="no" onclick="noClicked()">NO 💔</button>
+    </div>
+
+    <button id="retryBtn" class="retry" onclick="tryAgain()">Try Again 🔁</button>
+
+    <p id="message"></p>
+</div>
+
+<script>
+    function yesClicked() {
+        document.getElementById("message").innerHTML =
+            "YAYYYY 🤩🤩🤩🤩<br>Happy Valentine’s Day! 🥳🥳🥳🥳";
+
+        document.getElementById("choices").style.display = "none";
+        document.getElementById("retryBtn").style.display = "none";
+
+        startHeartRain();
+    }
+
+    function noClicked() {
+        document.getElementById("message").innerHTML =
+            "Invalid option bruh 👎👎👎<br>TRY AGAIN 😡😡😡😡";
+
+        document.getElementById("choices").style.display = "none";
+        document.getElementById("retryBtn").style.display = "inline-block";
+    }
+
+    function tryAgain() {
+        document.getElementById("message").innerHTML = "";
+        document.getElementById("choices").style.display = "block";
+        document.getElementById("retryBtn").style.display = "none";
+    }
+
+    // ❤️ HEART RAIN FUNCTION
+    function startHeartRain() {
+        const hearts = ["❤️", "💖", "💘", "💕", "💞"];
+        const duration = 3000; // 3 seconds
+        const interval = setInterval(() => {
+            const heart = document.createElement("div");
+            heart.className = "heart";
+            heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 5000);
+        }, 100);
+
+        setTimeout(() => clearInterval(interval), duration);
+    }
+</script>
+
+</body>
+</html>
+
